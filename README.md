@@ -1,42 +1,72 @@
-# SIGAP — Smart AI-Based Haze Monitoring and Early Warning System
+# SIGAP
 
-**SIGAP** is an Artificial Intelligence-powered platform developed to support real-time environmental monitoring, haze detection, and early risk anticipation. The system aims to transform environmental data into actionable insights through intelligent data analysis, predictive modeling, and interactive visualization.
+Aplikasi web responsif untuk pemantauan lingkungan dan kesiapsiagaan darurat di Indonesia. Proyek ini mengikuti enam layar pada referensi: Pantau, Peta & Titik Api, Rencana Aman, SIGAP AI, Mode Siaga, dan Panduan Darurat.
 
-## Overview
+## Fitur
 
-Air pollution and haze are significant environmental challenges that can affect public health, environmental sustainability, and daily activities. SIGAP addresses these challenges by providing an integrated platform that helps users monitor environmental conditions, understand potential risks, and access relevant information for better decision-making.
+- Enam rute aplikasi dan satu halaman pratinjau layar.
+- Ringkasan kualitas udara, saran kesehatan, grafik risiko, dan indikasi titik panas dalam data demonstrasi.
+- Peta skematis dengan filter, pilihan indikasi, dan kontrol zoom tanpa API key.
+- Asisten aturan lokal dengan jawaban demonstrasi.
+- Countdown lokal dengan kontrol jeda dan atur ulang.
+- Langkah keselamatan, status aman sesi lokal, dan tombol berbagi jika browser mendukungnya.
+- Layout desktop dan mobile dengan navigasi samping dan navigasi bawah.
 
-By leveraging Artificial Intelligence and data-driven technologies, SIGAP aims to improve environmental awareness and support proactive responses to potential haze-related threats.
+## Stack dan struktur
 
-## Key Features
+React 19, TypeScript strict, Vite, React Router, Lucide React, Vitest, dan Testing Library.
 
-- **Environmental Monitoring:** Provides environmental information and monitoring capabilities to help users understand air quality and haze conditions.
-- **AI-Based Prediction:** Utilizes machine learning approaches to analyze environmental patterns and support potential risk prediction.
-- **Early Warning System:** Helps communicate potential environmental risks through informative alerts and warnings.
-- **Data Visualization:** Presents environmental information through interactive charts, dashboards, and visual representations.
-- **Risk Analysis:** Supports the interpretation of environmental conditions to improve awareness and preparedness.
-- **User-Friendly Interface:** Provides an accessible platform for users to explore environmental information and insights.
+```text
+src/
+  components/Layout.tsx
+  data/mock.ts
+  pages/Pages.tsx
+  services/assistant.ts
+  test/app.test.tsx
+  test/setup.ts
+  types.ts
+  App.tsx
+  main.tsx
+  styles.css
+eslint.config.js
+netlify.toml
+vercel.json
+```
 
-## Project Objectives
+## Menjalankan lokal
 
-1. Develop an intelligent platform for environmental and haze monitoring.
-2. Utilize Artificial Intelligence to support environmental risk analysis.
-3. Provide data-driven insights for early anticipation of haze-related threats.
-4. Improve public awareness of environmental conditions and potential health impacts.
-5. Support informed decision-making through accessible environmental information.
+Prasyarat: Node.js 20.19+ atau 22.12+ dan npm. Versi dependensi dikunci di `package-lock.json`.
 
-## Technology
+```bash
+npm ci
+npm run dev
+```
 
-The project is designed around AI-driven data processing, machine learning, environmental data analysis, and interactive web-based visualization.
+Vite menampilkan alamat lokal di terminal. Route awal `/` diarahkan ke `/pantau`.
 
-*Note: The exact frameworks, libraries, datasets, and model architectures should be documented according to the actual implementation.*
+Tidak ada variabel environment wajib. `.env.example` tersedia sebagai penanda bahwa versi demo tidak memerlukan API key. Jangan memasukkan secret frontend; integrasi privat berikutnya perlu dijalankan melalui backend.
 
-## Project Vision
+## Perintah proyek
 
-SIGAP aims to contribute to a smarter and more responsive environmental monitoring ecosystem by integrating Artificial Intelligence, predictive analytics, and accessible information into one platform.
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run format:check
+npm run build
+npm run preview
+```
 
-**Turning Environmental Data into Actionable Insights.**
+## Deploy
 
----
+Build aplikasi dengan `npm run build`; hasil produksi ada di `dist/`. Deploy folder `dist` ke Vercel atau Netlify. `vercel.json` dan `netlify.toml` menyertakan rewrite agar route React Router tetap dapat dibuka langsung dan di-refresh.
 
-Developed as an Artificial Intelligence-based innovation project.
+## Data, status fitur, dan batasan
+
+Seluruh kualitas udara, jarak indikasi panas, tanggal, dan perkiraan risiko pada versi ini adalah data simulasi deterministik. Data ini bukan pengukuran langsung, prakiraan resmi, atau konfirmasi kebakaran. Peta hanya ilustrasi skematis tanpa tile eksternal. Asisten menggunakan aturan lokal dan bukan LLM. Aplikasi tidak menghubungi layanan darurat, melaporkan insiden, mengirim lokasi, atau mengubah lock screen/Do Not Disturb. Tidak ada environment variable atau API key yang dibutuhkan. Font memakai font sistem sehingga tidak meminta font dari penyedia eksternal.
+
+Adaptive alert, kanal laporan resmi, routing ke shelter terverifikasi, kontak darurat, layanan lokasi, serta feed lingkungan langsung belum terintegrasi. Tombol navigasi/laporan/kontak pada panduan menjelaskan keterbatasan demo; tidak ada klaim bahwa tindakan sudah dikirim. Countdown hanya berjalan di halaman selama sesi terbuka.
+
+## Mengganti layanan simulasi
+
+Data untuk UI dipusatkan di `src/data/mock.ts`; jawaban asisten di `src/services/assistant.ts`. Integrasi berikutnya dapat mengganti modul tersebut dengan service API typed, validasi respons, metadata sumber/waktu/status data, serta fallback offline. Tidak ada backend di release ini. Simpan kredensial hanya di backend tepercaya, bukan di bundle frontend.

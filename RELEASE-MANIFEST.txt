@@ -1,0 +1,18 @@
+SIGAP release manifest
+=====================
+
+Application: SIGAP environmental monitoring and emergency preparedness demo
+Stack: React, TypeScript, Vite, React Router, Lucide React
+
+Included:
+- src/ application routes, layout, typed mock data, local assistant, styles, and tests
+- package.json and package-lock.json
+- TypeScript, Vite, and ESLint configuration
+- .env.example and .gitignore
+- README.md
+- Netlify and Vercel SPA fallback configuration
+
+Excluded: node_modules, dist, build caches, coverage, local .env secrets, and Git metadata.
+
+No backend, API key, external environmental feed, or real emergency service is included.
+All environmental values and assistant answers are explicitly demonstration data.
